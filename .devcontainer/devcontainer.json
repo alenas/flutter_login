@@ -1,0 +1,32 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "Flutter",
+  "image": "ghcr.io/cirruslabs/flutter:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Dart-Code.flutter"
+      ]
+    }
+  },
+  "postCreateCommand": "flutter --disable-analytics && flutter pub get",
+  // workspace mounts do not work yet with this type of container
+  //"workspaceMount": "source=kinubi_volume,target=/workspaces,type=volume",
+  "workspaceFolder": "/workspaces",
+  // "runArgs": [
+  //   "--privileged",
+  //   "-v",
+  //   "/dev/bus/usb:/dev/bus/usb"
+  // ],
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    5454 // Port for Flutter WEB
+    //5037  // Port for Android ADB
+  ],
+  // Configure tool-specific properties.
+  // "customizations": {},
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  //"remoteUser": "root"
+}
