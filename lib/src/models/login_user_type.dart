@@ -36,7 +36,7 @@ enum LoginUserType {
   /// International phone number input field.
   ///
   /// May provide country code selection and international formatting.
-  intlPhone,
+  //intlPhone,
 
   /// Checkbox field (e.g. terms and conditions).
   ///

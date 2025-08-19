@@ -105,7 +105,7 @@ class LoginScreen extends StatelessWidget {
       additionalSignupFields: [
         const UserFormField(
           keyName: 'Username',
-          icon: Icon(FontAwesomeIcons.userLarge),
+          icon: Icon(FontAwesomeIcons.user),
         ),
         const UserFormField(keyName: 'Name'),
         const UserFormField(keyName: 'Surname'),
@@ -117,9 +117,7 @@ class LoginScreen extends StatelessWidget {
             final phoneRegExp = RegExp(
               r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$',
             );
-            if (value != null &&
-                value.length < 7 &&
-                !phoneRegExp.hasMatch(value)) {
+            if (value != null && value.length < 7 && !phoneRegExp.hasMatch(value)) {
               return "This isn't a valid phone number";
             }
             return null;

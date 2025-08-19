@@ -6,7 +6,7 @@ class _ConfirmSignupCard extends StatefulWidget {
     required this.onSubmitCompleted,
     required this.loadingController,
     required this.keyboardType,
-    required this.initialIsoCode,
+    //required this.initialIsoCode,
     super.key,
     this.loginAfterSignUp = true,
   });
@@ -16,14 +16,13 @@ class _ConfirmSignupCard extends StatefulWidget {
   final VoidCallback onSubmitCompleted;
   final AnimationController loadingController;
   final TextInputType? keyboardType;
-  final String? initialIsoCode;
+  //final String? initialIsoCode;
 
   @override
   _ConfirmSignupCardState createState() => _ConfirmSignupCardState();
 }
 
-class _ConfirmSignupCardState extends State<_ConfirmSignupCard>
-    with SingleTickerProviderStateMixin {
+class _ConfirmSignupCardState extends State<_ConfirmSignupCard> with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formRecoverKey = GlobalKey();
 
   // List of animation controller for every field
@@ -153,7 +152,7 @@ class _ConfirmSignupCardState extends State<_ConfirmSignupCard>
       },
       onSaved: (value) => _code = value!,
       keyboardType: widget.keyboardType,
-      initialIsoCode: widget.initialIsoCode,
+      //initialIsoCode: widget.initialIsoCode,
     );
   }
 

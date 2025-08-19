@@ -16,8 +16,8 @@ String getAutofillHints(LoginUserType userType) {
     case LoginUserType.lastName:
       return AutofillHints.familyName;
     case LoginUserType.phone:
-    case LoginUserType.intlPhone:
-      return AutofillHints.telephoneNumber;
+    //case LoginUserType.intlPhone:
+    //return AutofillHints.telephoneNumber;
     case LoginUserType.email:
       return AutofillHints.email;
   }
@@ -36,8 +36,8 @@ TextInputType getKeyboardType(LoginUserType userType) {
     case LoginUserType.checkbox:
       return TextInputType.text;
     case LoginUserType.phone:
-    case LoginUserType.intlPhone:
-      return TextInputType.phone;
+    //case LoginUserType.intlPhone:
+    // return TextInputType.phone;
     case LoginUserType.email:
       return TextInputType.emailAddress;
   }
@@ -55,8 +55,8 @@ Icon getPrefixIcon(LoginUserType userType) {
     case LoginUserType.checkbox:
       return const Icon(FontAwesomeIcons.circleUser);
     case LoginUserType.phone:
-    case LoginUserType.intlPhone:
-      return const Icon(FontAwesomeIcons.squarePhoneFlip);
+    //case LoginUserType.intlPhone:
+    //return const Icon(FontAwesomeIcons.squarePhoneFlip);
     case LoginUserType.email:
       return const Icon(FontAwesomeIcons.squareEnvelope);
   }
@@ -74,8 +74,8 @@ String getLabelText(LoginUserType userType) {
     case LoginUserType.lastName:
       return 'Last Name';
     case LoginUserType.phone:
-    case LoginUserType.intlPhone:
-      return 'Phone';
+    //case LoginUserType.intlPhone:
+    //return 'Phone';
     case LoginUserType.email:
       return 'Email';
     case LoginUserType.text:

@@ -7,17 +7,17 @@ screenshots:
     path: demo/basic.png
 
 environment:
-  sdk: ">=3.2.0 <4.0.0"
-  flutter: ">=3.16.0"
+  sdk: ">=3.9.0 <4.0.0"
+  flutter: ">=3.35.0"
 
 dependencies:
-  another_flushbar: ^1.12.30
-  another_transformer_page_view: ^2.0.0
   flutter:
     sdk: flutter
+  another_flushbar: ^1.12.30
+  another_transformer_page_view: ^2.0.0
   font_awesome_flutter: ^10.0.0
-  intl_phone_number_input: ^0.7.4
-  phone_numbers_parser: ^9.0.0
+  #intl_phone_number_input: ^0.7.4
+  #phone_numbers_parser: ^9.0.0
   provider: ^6.0.1
   quiver: ^3.0.1
   sign_in_button: ^4.0.1
@@ -27,7 +27,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.0.16
-  very_good_analysis: ^8.0.0
+  very_good_analysis: ^9.0.0
 
 flutter:
   uses-material-design: true

@@ -6,7 +6,7 @@ class _AdditionalSignUpCard extends StatefulWidget {
     required this.onBack,
     required this.onSubmitCompleted,
     required this.loadingController,
-    required this.initialIsoCode,
+    //required this.initialIsoCode,
     super.key,
     this.loginTheme,
   }) {
@@ -24,14 +24,13 @@ class _AdditionalSignUpCard extends StatefulWidget {
   final VoidCallback onSubmitCompleted;
   final LoginTheme? loginTheme;
   final AnimationController loadingController;
-  final String? initialIsoCode;
+  // final String? initialIsoCode;
 
   @override
   _AdditionalSignUpCardState createState() => _AdditionalSignUpCardState();
 }
 
-class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard>
-    with TickerProviderStateMixin {
+class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formCompleteSignupKey = GlobalKey();
 
   // Used to remember all text controllers
@@ -127,8 +126,7 @@ class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard>
 
     // We have to convert the Map<String, TextEditingController> to a Map<String, String>
     // and pass it to the function given by the user
-    auth.additionalSignupData =
-        _nameControllers.map((key, value) => MapEntry(key, value.text));
+    auth.additionalSignupData = _nameControllers.map((key, value) => MapEntry(key, value.text));
 
     switch (auth.authType) {
       case AuthType.provider:
@@ -189,19 +187,15 @@ class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard>
               loadingController: widget.loadingController,
               width: width,
               labelText: formField.displayName,
-              prefixIcon: formField.icon ??
-                  const Icon(FontAwesomeIcons.solidCircleUser),
+              prefixIcon: formField.icon ?? const Icon(FontAwesomeIcons.solidCircleUser),
               keyboardType: getKeyboardType(formField.userType),
               autofillHints: [
                 getAutofillHints(formField.userType),
               ],
-              textInputAction:
-                  formField.keyName == widget.formFields.last.keyName
-                      ? TextInputAction.done
-                      : TextInputAction.next,
+              textInputAction: formField.keyName == widget.formFields.last.keyName ? TextInputAction.done : TextInputAction.next,
               validator: formField.fieldValidator,
               tooltip: formField.tooltip,
-              initialIsoCode: widget.initialIsoCode,
+              //initialIsoCode: widget.initialIsoCode,
             ),
             const SizedBox(
               height: 5,
@@ -228,10 +222,7 @@ class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard>
     LoginMessages messages,
     LoginTheme? loginTheme,
   ) {
-    final calculatedTextColor =
-        (theme.cardTheme.color!.computeLuminance() < 0.5)
-            ? Colors.white
-            : theme.primaryColor;
+    final calculatedTextColor = (theme.cardTheme.color!.computeLuminance() < 0.5) ? Colors.white : theme.primaryColor;
     return ScaleTransition(
       scale: _buttonScaleAnimation,
       child: MaterialButton(

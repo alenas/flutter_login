@@ -46,7 +46,7 @@ class AuthCard extends StatefulWidget {
     required this.loadingController,
     required this.scrollable,
     required this.confirmSignupKeyboardType,
-    required this.initialIsoCode,
+    //required this.initialIsoCode,
     required this.hideSignupPasswordFields,
     required this.onSwitchAuthMode,
     required this.autofocus,
@@ -130,7 +130,7 @@ class AuthCard extends StatefulWidget {
   final Widget? introWidget;
 
   /// The default ISO country code used in phone fields.
-  final String? initialIsoCode;
+  //final String? initialIsoCode;
 
   /// Whether to hide password fields during signup (e.g., for OTP-only flows).
   final bool hideSignupPasswordFields;
@@ -228,27 +228,23 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
 
     // replace 0 with minPositive to pass the test
     // https://github.com/flutter/flutter/issues/42527#issuecomment-575131275
-    _cardOverlayHeightFactorAnimation =
-        Tween<double>(begin: double.minPositive, end: 1).animate(
+    _cardOverlayHeightFactorAnimation = Tween<double>(begin: double.minPositive, end: 1).animate(
       CurvedAnimation(
         parent: _routeTransitionController,
         curve: const Interval(.27272727, .5),
       ),
     );
 
-    _cardOverlaySizeAndOpacityAnimation =
-        Tween<double>(begin: 1, end: 0).animate(
+    _cardOverlaySizeAndOpacityAnimation = Tween<double>(begin: 1, end: 0).animate(
       CurvedAnimation(
         parent: _routeTransitionController,
         curve: const Interval(.5, .72727272),
       ),
     );
 
-    _cardSize2AnimationX =
-        Tween<double>(begin: 1, end: 1).animate(_routeTransitionController);
+    _cardSize2AnimationX = Tween<double>(begin: 1, end: 1).animate(_routeTransitionController);
 
-    _cardSize2AnimationY =
-        Tween<double>(begin: 1, end: 1).animate(_routeTransitionController);
+    _cardSize2AnimationY = Tween<double>(begin: 1, end: 1).animate(_routeTransitionController);
 
     _cardRotationAnimation = Tween<double>(begin: 0, end: pi / 2).animate(
       CurvedAnimation(
@@ -302,9 +298,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
         }
       });
     } else if (widget.loadingController.isCompleted) {
-      return _formLoadingController
-          .reverse()
-          .then((_) => widget.loadingController.reverse());
+      return _formLoadingController.reverse().then((_) => widget.loadingController.reverse());
     }
     return null;
   }
@@ -319,15 +313,13 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
     final widthRatio = deviceSize.width / cardSize.height + 2;
     final heightRatio = deviceSize.height / cardSize.width + .25;
 
-    _cardSize2AnimationX =
-        Tween<double>(begin: 1, end: heightRatio / cardSizeScaleEnd).animate(
+    _cardSize2AnimationX = Tween<double>(begin: 1, end: heightRatio / cardSizeScaleEnd).animate(
       CurvedAnimation(
         parent: _routeTransitionController,
         curve: const Interval(.72727272, 1, curve: Curves.easeInOutCubic),
       ),
     );
-    _cardSize2AnimationY =
-        Tween<double>(begin: 1, end: widthRatio / cardSizeScaleEnd).animate(
+    _cardSize2AnimationY = Tween<double>(begin: 1, end: widthRatio / cardSizeScaleEnd).animate(
       CurvedAnimation(
         parent: _routeTransitionController,
         curve: const Interval(.72727272, 1, curve: Curves.easeInOutCubic),
@@ -336,15 +328,11 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
 
     widget.onSubmit?.call();
 
-    return _formLoadingController
-        .reverse()
-        .then((_) => _routeTransitionController.forward());
+    return _formLoadingController.reverse().then((_) => _routeTransitionController.forward());
   }
 
   void _reverseChangeRouteAnimation() {
-    _routeTransitionController
-        .reverse()
-        .then((_) => _formLoadingController.forward());
+    _routeTransitionController.reverse().then((_) => _formLoadingController.forward());
   }
 
   /// Runs the route transition animation to visually switch between screens.
@@ -427,7 +415,8 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
     final formController = _formLoadingController;
     // if (!_isLoadingFirstTime) formController = _formLoadingController..value = 1.0;
     Future<bool> requireSignUpConfirmation() async {
-      final confirmSignupRequired = await auth.confirmSignupRequired?.call(
+      final confirmSignupRequired =
+          await auth.confirmSignupRequired?.call(
             LoginData(
               name: auth.email,
               password: auth.password,
@@ -448,11 +437,9 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             userValidator: widget.userValidator,
             validateUserImmediately: widget.validateUserImmediately,
             passwordValidator: widget.passwordValidator,
-            requireAdditionalSignUpFields:
-                widget.additionalSignUpFields != null,
+            requireAdditionalSignUpFields: widget.additionalSignUpFields != null,
             onSwitchRecoveryPassword: () => _changeCard(_recoveryIndex),
-            onSwitchSignUpAdditionalData: () =>
-                _changeCard(_additionalSignUpIndex),
+            onSwitchSignUpAdditionalData: () => _changeCard(_additionalSignUpIndex),
             onSubmitCompleted: () {
               _forwardChangeRouteAnimation(_loginCardKey).then((_) {
                 widget.onSubmitCompleted?.call();
@@ -465,7 +452,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             loginAfterSignUp: widget.loginAfterSignUp,
             hideProvidersTitle: widget.hideProvidersTitle,
             introWidget: widget.introWidget,
-            initialIsoCode: widget.initialIsoCode,
+            //initialIsoCode: widget.initialIsoCode,
             hideSignupPasswordFields: widget.hideSignupPasswordFields,
             onSwitchAuthMode: widget.onSwitchAuthMode,
             autofocus: widget.autofocus,
@@ -486,7 +473,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
               _changeCard(_loginPageIndex);
             }
           },
-          initialIsoCode: widget.initialIsoCode,
+          //initialIsoCode: widget.initialIsoCode,
           autofocusName: widget.autofocus,
         );
 
@@ -504,20 +491,18 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             onBack: () => _changeCard(_loginPageIndex),
             loginTheme: widget.loginTheme,
             onSubmitCompleted: () async {
-              final requireSignupConfirmation =
-                  await requireSignUpConfirmation();
+              final requireSignupConfirmation = await requireSignUpConfirmation();
               if (requireSignupConfirmation) {
                 _changeCard(_confirmSignup);
               } else if (widget.loginAfterSignUp) {
-                await _forwardChangeRouteAnimation(_additionalSignUpCardKey)
-                    .then((_) {
+                await _forwardChangeRouteAnimation(_additionalSignUpCardKey).then((_) {
                   widget.onSubmitCompleted?.call();
                 });
               } else {
                 _changeCard(_loginPageIndex);
               }
             },
-            initialIsoCode: widget.initialIsoCode,
+            //initialIsoCode: widget.initialIsoCode,
           ),
         );
 
@@ -527,7 +512,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
           passwordValidator: widget.passwordValidator!,
           onBack: () => _changeCard(_loginPageIndex),
           onSubmitCompleted: () => _changeCard(_loginPageIndex),
-          initialIsoCode: widget.initialIsoCode,
+          //initialIsoCode: widget.initialIsoCode,
         );
 
       case _confirmSignup:
@@ -535,9 +520,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
           theme: Theme.of(context),
           child: _ConfirmSignupCard(
             key: _confirmSignUpCardKey,
-            onBack: () => auth.additionalSignupData == null
-                ? _changeCard(_loginPageIndex)
-                : _changeCard(_additionalSignUpIndex),
+            onBack: () => auth.additionalSignupData == null ? _changeCard(_loginPageIndex) : _changeCard(_additionalSignUpIndex),
             loadingController: formController,
             onSubmitCompleted: () {
               if (widget.loginAfterSignUp) {
@@ -550,7 +533,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             },
             loginAfterSignUp: widget.loginAfterSignUp,
             keyboardType: widget.confirmSignupKeyboardType,
-            initialIsoCode: widget.initialIsoCode,
+            //initialIsoCode: widget.initialIsoCode,
           ),
         );
     }
@@ -573,9 +556,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
         /// Need to keep track of page index because soft keyboard will
         /// make page view rebuilt
         index: _pageIndex,
-        transformer: widget.disableCustomPageTransformer
-            ? null
-            : CustomPageTransformer(),
+        transformer: widget.disableCustomPageTransformer ? null : CustomPageTransformer(),
         itemBuilder: (BuildContext context, int index) {
           if (widget.scrollable) {
             return Align(

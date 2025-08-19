@@ -8,7 +8,7 @@ class _RecoverCard extends StatefulWidget {
     required this.navigateBack,
     required this.onSubmitCompleted,
     required this.loadingController,
-    required this.initialIsoCode,
+    //required this.initialIsoCode,
     required this.autofocusName,
     this.loginTheme,
   });
@@ -21,15 +21,14 @@ class _RecoverCard extends StatefulWidget {
   final AnimationController loadingController;
 
   final VoidCallback onSubmitCompleted;
-  final String? initialIsoCode;
+  //final String? initialIsoCode;
   final bool autofocusName;
 
   @override
   _RecoverCardState createState() => _RecoverCardState();
 }
 
-class _RecoverCardState extends State<_RecoverCard>
-    with SingleTickerProviderStateMixin {
+class _RecoverCardState extends State<_RecoverCard> with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formRecoverKey = GlobalKey();
 
   bool _isSubmitting = false;
@@ -111,7 +110,7 @@ class _RecoverCardState extends State<_RecoverCard>
       onFieldSubmitted: (value) => _submit(),
       validator: widget.userValidator,
       onSaved: (value) => auth.email = value!,
-      initialIsoCode: widget.initialIsoCode,
+      //initialIsoCode: widget.initialIsoCode,
       autofocus: widget.autofocusName,
     );
   }
@@ -129,10 +128,7 @@ class _RecoverCardState extends State<_RecoverCard>
     LoginMessages messages,
     LoginTheme? loginTheme,
   ) {
-    final calculatedTextColor =
-        (theme.cardTheme.color!.computeLuminance() < 0.5)
-            ? Colors.white
-            : theme.primaryColor;
+    final calculatedTextColor = (theme.cardTheme.color!.computeLuminance() < 0.5) ? Colors.white : theme.primaryColor;
     return MaterialButton(
       onPressed: !_isSubmitting
           ? () {
@@ -182,9 +178,7 @@ class _RecoverCardState extends State<_RecoverCard>
                 _buildRecoverNameField(textFieldWidth, messages, auth),
                 const SizedBox(height: 20),
                 Text(
-                  auth.onConfirmRecover != null
-                      ? messages.recoverCodePasswordDescription
-                      : messages.recoverPasswordDescription,
+                  auth.onConfirmRecover != null ? messages.recoverCodePasswordDescription : messages.recoverPasswordDescription,
                   key: kRecoverPasswordDescriptionKey,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.bodyMedium,

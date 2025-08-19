@@ -5,21 +5,20 @@ class _ConfirmRecoverCard extends StatefulWidget {
     required this.passwordValidator,
     required this.onBack,
     required this.onSubmitCompleted,
-    required this.initialIsoCode,
+    //required this.initialIsoCode,
     super.key,
   });
 
   final FormFieldValidator<String> passwordValidator;
   final VoidCallback onBack;
   final VoidCallback onSubmitCompleted;
-  final String? initialIsoCode;
+  //final String? initialIsoCode;
 
   @override
   _ConfirmRecoverCardState createState() => _ConfirmRecoverCardState();
 }
 
-class _ConfirmRecoverCardState extends State<_ConfirmRecoverCard>
-    with SingleTickerProviderStateMixin {
+class _ConfirmRecoverCardState extends State<_ConfirmRecoverCard> with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formRecoverKey = GlobalKey();
 
   final _passwordFocusNode = FocusNode();
@@ -107,7 +106,7 @@ class _ConfirmRecoverCardState extends State<_ConfirmRecoverCard>
         return null;
       },
       onSaved: (value) => _code = value!,
-      initialIsoCode: widget.initialIsoCode,
+      //initialIsoCode: widget.initialIsoCode,
     );
   }
 
@@ -125,7 +124,7 @@ class _ConfirmRecoverCardState extends State<_ConfirmRecoverCard>
       onSaved: (value) {
         Provider.of<Auth>(context, listen: false).password = value!;
       },
-      initialIsoCode: widget.initialIsoCode,
+      // initialIsoCode: widget.initialIsoCode,
     );
   }
 
@@ -142,7 +141,7 @@ class _ConfirmRecoverCardState extends State<_ConfirmRecoverCard>
         }
         return null;
       },
-      initialIsoCode: widget.initialIsoCode,
+      //initialIsoCode: widget.initialIsoCode,
     );
   }
 

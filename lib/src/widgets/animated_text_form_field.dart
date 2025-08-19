@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:flutter_login/src/widgets/term_of_service_checkbox.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:phone_numbers_parser/phone_numbers_parser.dart' as pnp;
+//import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+//import 'package:phone_numbers_parser/phone_numbers_parser.dart' as pnp;
 import 'package:url_launcher/url_launcher.dart';
 
 /// Represents the direction of inertial animation applied to a text field.
@@ -52,7 +52,7 @@ class AnimatedTextFormField extends StatefulWidget {
   /// and vice versa.
   const AnimatedTextFormField({
     required this.width,
-    required this.initialIsoCode,
+    //required this.initialIsoCode,
     super.key,
     this.textFormFieldKey,
     this.interval = const Interval(0, 1),
@@ -78,10 +78,9 @@ class AnimatedTextFormField extends StatefulWidget {
     this.autofillHints,
     this.tooltip,
   }) : assert(
-          (inertiaController == null && inertiaDirection == null) ||
-              (inertiaController != null && inertiaDirection != null),
-          'inertiaController and inertiaDirection must either both be null or both be non-null',
-        );
+         (inertiaController == null && inertiaDirection == null) || (inertiaController != null && inertiaDirection != null),
+         'inertiaController and inertiaDirection must either both be null or both be non-null',
+       );
 
   /// A unique key for the internal [TextFormField].
   final Key? textFormFieldKey;
@@ -156,7 +155,7 @@ class AnimatedTextFormField extends StatefulWidget {
   final InlineSpan? tooltip;
 
   /// ISO country code used as default for phone number input (e.g., "US", "IN").
-  final String? initialIsoCode;
+  //final String? initialIsoCode;
 
   @override
   State<AnimatedTextFormField> createState() => _AnimatedTextFormFieldState();
@@ -171,8 +170,8 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
   late Animation<double> iconRotationAnimation;
   late Animation<double> iconTranslateAnimation;
 
-  PhoneNumber? _phoneNumberInitialValue;
-  final TextEditingController _phoneNumberController = TextEditingController();
+  //PhoneNumber? _phoneNumberInitialValue;
+  //final TextEditingController _phoneNumberController = TextEditingController();
 
   @override
   void initState() {
@@ -184,21 +183,22 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
     final loadingController = widget.loadingController;
 
     if (loadingController != null) {
-      scaleAnimation = Tween<double>(
-        begin: 0,
-        end: 1,
-      ).animate(
-        CurvedAnimation(
-          parent: loadingController,
-          curve: _getInternalInterval(
-            0,
-            .2,
-            interval!.begin,
-            interval.end,
-            Curves.easeOutBack,
-          ),
-        ),
-      );
+      scaleAnimation =
+          Tween<double>(
+            begin: 0,
+            end: 1,
+          ).animate(
+            CurvedAnimation(
+              parent: loadingController,
+              curve: _getInternalInterval(
+                0,
+                .2,
+                interval!.begin,
+                interval.end,
+                Curves.easeOutBack,
+              ),
+            ),
+          );
       suffixIconOpacityAnimation = Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(
           parent: loadingController,
@@ -213,18 +213,18 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
     final sign = inertiaDirection == TextFieldInertiaDirection.right ? 1 : -1;
 
     if (inertiaController != null) {
-      fieldTranslateAnimation = Tween<double>(
-        begin: 0,
-        end: sign * 15.0,
-      ).animate(
-        CurvedAnimation(
-          parent: inertiaController,
-          curve: const Interval(0, .5, curve: Curves.easeOut),
-          reverseCurve: Curves.easeIn,
-        ),
-      );
-      iconRotationAnimation =
-          Tween<double>(begin: 0, end: sign * pi / 12 /* ~15deg */).animate(
+      fieldTranslateAnimation =
+          Tween<double>(
+            begin: 0,
+            end: sign * 15.0,
+          ).animate(
+            CurvedAnimation(
+              parent: inertiaController,
+              curve: const Interval(0, .5, curve: Curves.easeOut),
+              reverseCurve: Curves.easeIn,
+            ),
+          );
+      iconRotationAnimation = Tween<double>(begin: 0, end: sign * pi / 12 /* ~15deg */).animate(
         CurvedAnimation(
           parent: inertiaController,
           curve: const Interval(.5, 1, curve: Curves.easeOut),
@@ -240,50 +240,51 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
       );
     }
 
-    if (widget.userType == LoginUserType.intlPhone) {
-      _phoneNumberInitialValue = PhoneNumber(
-        isoCode: widget.initialIsoCode ?? 'US',
-        dialCode: '+1',
-      );
-      if (widget.controller?.value.text != null) {
-        try {
-          final parsed = pnp.PhoneNumber.parse(widget.controller!.value.text);
-          if (parsed.isValid()) {
-            _phoneNumberInitialValue = PhoneNumber(
-              phoneNumber: parsed.nsn,
-              isoCode: parsed.isoCode.name,
-              dialCode: parsed.countryCode,
-            );
-          }
-        } on pnp.PhoneNumberException {
-          // ignore
-        } finally {
-          widget.controller!.text = '';
-        }
-      }
-    }
+    // if (widget.userType == LoginUserType.intlPhone) {
+    //   _phoneNumberInitialValue = PhoneNumber(
+    //     isoCode: widget.initialIsoCode ?? 'US',
+    //     dialCode: '+1',
+    //   );
+    //   if (widget.controller?.value.text != null) {
+    //     try {
+    //       final parsed = pnp.PhoneNumber.parse(widget.controller!.value.text);
+    //       if (parsed.isValid()) {
+    //         _phoneNumberInitialValue = PhoneNumber(
+    //           phoneNumber: parsed.nsn,
+    //           isoCode: parsed.isoCode.name,
+    //           dialCode: parsed.countryCode,
+    //         );
+    //       }
+    //     } on pnp.PhoneNumberException {
+    //       // ignore
+    //     } finally {
+    //       widget.controller!.text = '';
+    //     }
+    //   }
+    // }
   }
 
   void _updateSizeAnimation() {
     final interval = widget.interval!;
     final loadingController = widget.loadingController!;
 
-    sizeAnimation = Tween<double>(
-      begin: 48,
-      end: widget.width,
-    ).animate(
-      CurvedAnimation(
-        parent: loadingController,
-        curve: _getInternalInterval(
-          .2,
-          1,
-          interval.begin,
-          interval.end,
-          Curves.linearToEaseOut,
-        ),
-        reverseCurve: Curves.easeInExpo,
-      ),
-    );
+    sizeAnimation =
+        Tween<double>(
+          begin: 48,
+          end: widget.width,
+        ).animate(
+          CurvedAnimation(
+            parent: loadingController,
+            curve: _getInternalInterval(
+              .2,
+              1,
+              interval.begin,
+              interval.end,
+              Curves.linearToEaseOut,
+            ),
+            reverseCurve: Curves.easeInExpo,
+          ),
+        );
   }
 
   @override
@@ -344,67 +345,67 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     Widget inputField;
-    if (widget.userType == LoginUserType.intlPhone) {
-      inputField = Padding(
-        padding: const EdgeInsets.only(left: 8),
-        child: InternationalPhoneNumberInput(
-          cursorColor: theme.primaryColor,
-          focusNode: widget.focusNode,
-          inputDecoration: _getInputDecoration(theme),
-          searchBoxDecoration: const InputDecoration(
-            contentPadding: EdgeInsets.only(left: 20),
-            labelText: 'Search by country name or dial code',
-          ),
-          keyboardType: widget.keyboardType ?? TextInputType.phone,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          onSaved: (phoneNumber) {
-            if (phoneNumber.phoneNumber == phoneNumber.dialCode) {
-              widget.controller?.text = '';
-            } else {
-              widget.controller?.text = phoneNumber.phoneNumber ?? '';
-            }
-            _phoneNumberController.selection = TextSelection.collapsed(
-              offset: _phoneNumberController.text.length,
-            );
-            widget.onSaved?.call(phoneNumber.phoneNumber);
-          },
-          validator: widget.validator,
-          autofillHints: widget.autofillHints,
-          onInputChanged: (phoneNumber) {
-            if (phoneNumber.phoneNumber != null &&
-                phoneNumber.dialCode != null &&
-                phoneNumber.phoneNumber!.startsWith('+')) {
-              _phoneNumberController.text =
-                  _phoneNumberController.text.replaceAll(
-                RegExp(
-                  '^([\\+]${phoneNumber.dialCode!.replaceAll('+', '')}[\\s]?)',
-                ),
-                '',
-              );
-            }
-            _phoneNumberController.selection = TextSelection.collapsed(
-              offset: _phoneNumberController.text.length,
-            );
-          },
-          textFieldController: _phoneNumberController,
-          isEnabled: widget.enabled,
-          selectorConfig: SelectorConfig(
-            selectorType: PhoneInputSelectorType.DIALOG,
-            trailingSpace: false,
-            countryComparator: (c1, c2) =>
-                int.parse(c1.dialCode!.substring(1)).compareTo(
-              int.parse(c2.dialCode!.substring(1)),
-            ),
-          ),
-          spaceBetweenSelectorAndTextField: 0,
-          initialValue: _phoneNumberInitialValue,
-        ),
-      );
-    } else if (widget.userType == LoginUserType.checkbox) {
+    // if (widget.userType == LoginUserType.intlPhone) {
+    //   inputField = Padding(
+    //     padding: const EdgeInsets.only(left: 8),
+    //     child: InternationalPhoneNumberInput(
+    //       cursorColor: theme.primaryColor,
+    //       focusNode: widget.focusNode,
+    //       inputDecoration: _getInputDecoration(theme),
+    //       searchBoxDecoration: const InputDecoration(
+    //         contentPadding: EdgeInsets.only(left: 20),
+    //         labelText: 'Search by country name or dial code',
+    //       ),
+    //       keyboardType: widget.keyboardType ?? TextInputType.phone,
+    //       onFieldSubmitted: widget.onFieldSubmitted,
+    //       onSaved: (phoneNumber) {
+    //         if (phoneNumber.phoneNumber == phoneNumber.dialCode) {
+    //           widget.controller?.text = '';
+    //         } else {
+    //           widget.controller?.text = phoneNumber.phoneNumber ?? '';
+    //         }
+    //         _phoneNumberController.selection = TextSelection.collapsed(
+    //           offset: _phoneNumberController.text.length,
+    //         );
+    //         widget.onSaved?.call(phoneNumber.phoneNumber);
+    //       },
+    //       validator: widget.validator,
+    //       autofillHints: widget.autofillHints,
+    //       onInputChanged: (phoneNumber) {
+    //         if (phoneNumber.phoneNumber != null &&
+    //             phoneNumber.dialCode != null &&
+    //             phoneNumber.phoneNumber!.startsWith('+')) {
+    //           _phoneNumberController.text =
+    //               _phoneNumberController.text.replaceAll(
+    //             RegExp(
+    //               '^([\\+]${phoneNumber.dialCode!.replaceAll('+', '')}[\\s]?)',
+    //             ),
+    //             '',
+    //           );
+    //         }
+    //         _phoneNumberController.selection = TextSelection.collapsed(
+    //           offset: _phoneNumberController.text.length,
+    //         );
+    //       },
+    //       textFieldController: _phoneNumberController,
+    //       isEnabled: widget.enabled,
+    //       selectorConfig: SelectorConfig(
+    //         selectorType: PhoneInputSelectorType.DIALOG,
+    //         trailingSpace: false,
+    //         countryComparator: (c1, c2) =>
+    //             int.parse(c1.dialCode!.substring(1)).compareTo(
+    //           int.parse(c2.dialCode!.substring(1)),
+    //         ),
+    //       ),
+    //       spaceBetweenSelectorAndTextField: 0,
+    //       initialValue: _phoneNumberInitialValue,
+    //     ),
+    //   );
+    //} else
+    if (widget.userType == LoginUserType.checkbox) {
       inputField = CheckboxFormField(
         initialValue: widget.controller?.text == 'true',
-        validator: (value) =>
-            widget.validator?.call((value ?? false).toString()),
+        validator: (value) => widget.validator?.call((value ?? false).toString()),
         onChanged: (value) {
           widget.onSaved?.call((value ?? false).toString());
           widget.controller?.text = (value ?? false).toString();
@@ -529,7 +530,7 @@ class AnimatedPasswordTextFormField extends StatefulWidget {
   /// If [inertiaController] is provided, then [inertiaDirection] must also be set (and vice versa).
   const AnimatedPasswordTextFormField({
     required this.animatedWidth,
-    required this.initialIsoCode,
+    //required this.initialIsoCode,
     super.key,
     this.interval = const Interval(0, 1),
     this.loadingController,
@@ -546,10 +547,9 @@ class AnimatedPasswordTextFormField extends StatefulWidget {
     this.onSaved,
     this.autofillHints,
   }) : assert(
-          (inertiaController == null && inertiaDirection == null) ||
-              (inertiaController != null && inertiaDirection != null),
-          'inertiaController and inertiaDirection must either both be null or both be non-null.',
-        );
+         (inertiaController == null && inertiaDirection == null) || (inertiaController != null && inertiaDirection != null),
+         'inertiaController and inertiaDirection must either both be null or both be non-null.',
+       );
 
   /// Interval defining how this field participates in an animation sequence.
   final Interval? interval;
@@ -597,15 +597,13 @@ class AnimatedPasswordTextFormField extends StatefulWidget {
   final Iterable<String>? autofillHints;
 
   /// ISO country code, passed for potential use in phone/password hybrid inputs.
-  final String? initialIsoCode;
+  // final String? initialIsoCode;
 
   @override
-  State<AnimatedPasswordTextFormField> createState() =>
-      _AnimatedPasswordTextFormFieldState();
+  State<AnimatedPasswordTextFormField> createState() => _AnimatedPasswordTextFormFieldState();
 }
 
-class _AnimatedPasswordTextFormFieldState
-    extends State<AnimatedPasswordTextFormField> {
+class _AnimatedPasswordTextFormFieldState extends State<AnimatedPasswordTextFormField> {
   var _obscureText = true;
 
   @override
@@ -627,7 +625,7 @@ class _AnimatedPasswordTextFormFieldState
           firstCurve: Curves.easeInOutSine,
           secondCurve: Curves.easeInOutSine,
           alignment: Alignment.center,
-          layoutBuilder: (Widget topChild, _, Widget bottomChild, __) {
+          layoutBuilder: (Widget topChild, _, Widget bottomChild, _) {
             return Stack(
               alignment: Alignment.center,
               children: <Widget>[bottomChild, topChild],
@@ -643,9 +641,7 @@ class _AnimatedPasswordTextFormFieldState
             size: 25,
             semanticLabel: 'hide password',
           ),
-          crossFadeState: _obscureText
-              ? CrossFadeState.showFirst
-              : CrossFadeState.showSecond,
+          crossFadeState: _obscureText ? CrossFadeState.showFirst : CrossFadeState.showSecond,
         ),
       ),
       obscureText: _obscureText,
@@ -657,7 +653,7 @@ class _AnimatedPasswordTextFormFieldState
       onFieldSubmitted: widget.onFieldSubmitted,
       onSaved: widget.onSaved,
       inertiaDirection: widget.inertiaDirection,
-      initialIsoCode: widget.initialIsoCode,
+      // initialIsoCode: widget.initialIsoCode,
     );
   }
 }
