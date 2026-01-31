@@ -1,6 +1,6 @@
 // For format details, see https://aka.ms/devcontainer.json.
 {
-  "name": "Flutter",
+  "name": "Flutter_Login",
   "image": "ghcr.io/cirruslabs/flutter:latest",
   "customizations": {
     "vscode": {
