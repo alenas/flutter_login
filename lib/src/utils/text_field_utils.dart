@@ -53,12 +53,12 @@ Icon getPrefixIcon(LoginUserType userType) {
     case LoginUserType.lastName:
     case LoginUserType.text:
     case LoginUserType.checkbox:
-      return const Icon(FontAwesomeIcons.circleUser);
+      return Icon(FontAwesomeIcons.circleUser.data);
     case LoginUserType.phone:
     //case LoginUserType.intlPhone:
     //return const Icon(FontAwesomeIcons.squarePhoneFlip);
     case LoginUserType.email:
-      return const Icon(FontAwesomeIcons.squareEnvelope);
+      return Icon(FontAwesomeIcons.squareEnvelope.data);
   }
 }
 

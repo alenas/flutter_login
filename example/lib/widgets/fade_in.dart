@@ -16,15 +16,14 @@ class FadeIn extends StatefulWidget {
     this.controller,
     this.duration,
     this.curve = Curves.easeOut,
-  })  : assert(
-          controller == null && duration != null ||
-              controller != null && duration == null,
-          'You must provide either a [duration] or a [controller], but not both.',
-        ),
-        assert(
-          offset > 0,
-          '[offset] must be greater than zero to apply a visible fade/slide effect.',
-        );
+  }) : assert(
+         controller == null && duration != null || controller != null && duration == null,
+         'You must provide either a [duration] or a [controller], but not both.',
+       ),
+       assert(
+         offset > 0,
+         '[offset] must be greater than zero to apply a visible fade/slide effect.',
+       );
 
   /// [FadeIn] animation can be controlled via external [controller]. If
   /// [controller] is not provided, it will use the default internal controller
@@ -46,7 +45,7 @@ class FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
   late Animation<double> _opacityAnimation;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
 
     if (widget.controller == null) {
@@ -57,7 +56,7 @@ class FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
     }
 
     _updateAnimations();
-    _controller?.forward();
+    await _controller?.forward();
   }
 
   void _updateAnimations() {
@@ -80,28 +79,29 @@ class FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
         end = Offset.zero;
     }
 
-    _slideAnimation = Tween<Offset>(
-      begin: begin,
-      end: end,
-    ).animate(
-      CurvedAnimation(
-        parent: _effectiveController!,
-        curve: widget.curve,
-      ),
-    );
-    _opacityAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(
-      CurvedAnimation(
-        parent: _effectiveController!,
-        curve: widget.curve,
-      ),
-    );
+    _slideAnimation =
+        Tween<Offset>(
+          begin: begin,
+          end: end,
+        ).animate(
+          CurvedAnimation(
+            parent: _effectiveController!,
+            curve: widget.curve,
+          ),
+        );
+    _opacityAnimation =
+        Tween<double>(
+          begin: 0,
+          end: 1,
+        ).animate(
+          CurvedAnimation(
+            parent: _effectiveController!,
+            curve: widget.curve,
+          ),
+        );
   }
 
-  AnimationController? get _effectiveController =>
-      widget.controller ?? _controller;
+  AnimationController? get _effectiveController => widget.controller ?? _controller;
 
   @override
   void dispose() {

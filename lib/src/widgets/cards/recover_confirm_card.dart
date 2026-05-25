@@ -94,7 +94,7 @@ class _ConfirmRecoverCardState extends State<_ConfirmRecoverCard> with SingleTic
     return AnimatedTextFormField(
       width: width,
       labelText: messages.recoveryCodeHint,
-      prefixIcon: const Icon(FontAwesomeIcons.solidCircleCheck),
+      prefixIcon: Icon(FontAwesomeIcons.solidCircleCheck.data),
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(_passwordFocusNode);

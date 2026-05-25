@@ -17,8 +17,7 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen>
-    with SingleTickerProviderStateMixin, TransitionRouteAware {
+class _DashboardScreenState extends State<DashboardScreen> with SingleTickerProviderStateMixin, TransitionRouteAware {
   Future<bool> _goToLogin(BuildContext context) {
     return Navigator.of(context)
         .pushReplacementNamed('/auth')
@@ -70,11 +69,11 @@ class _DashboardScreenState extends State<DashboardScreen>
   AppBar _buildAppBar(ThemeData theme) {
     final menuBtn = IconButton(
       color: theme.colorScheme.secondary,
-      icon: const Icon(FontAwesomeIcons.bars),
+      icon: Icon(FontAwesomeIcons.bars.data),
       onPressed: () {},
     );
     final signOutBtn = IconButton(
-      icon: const Icon(FontAwesomeIcons.rightFromBracket),
+      icon: Icon(FontAwesomeIcons.rightFromBracket.data),
       color: theme.colorScheme.secondary,
       onPressed: () => _goToLogin(context),
     );
@@ -130,10 +129,8 @@ class _DashboardScreenState extends State<DashboardScreen>
   }
 
   Widget _buildHeader(ThemeData theme) {
-    final primaryColor =
-        Colors.primaries.where((c) => c == theme.primaryColor).first;
-    final accentColor =
-        Colors.primaries.where((c) => c == theme.colorScheme.secondary).first;
+    final primaryColor = Colors.primaries.where((c) => c == theme.primaryColor).first;
+    final accentColor = Colors.primaries.where((c) => c == theme.colorScheme.secondary).first;
     final linearGradient = LinearGradient(
       colors: [
         primaryColor.shade800,
@@ -212,7 +209,7 @@ class _DashboardScreenState extends State<DashboardScreen>
       crossAxisCount: 3,
       children: [
         _buildButton(
-          icon: const Icon(FontAwesomeIcons.user),
+          icon: Icon(FontAwesomeIcons.user.data),
           label: 'Profile',
           interval: const Interval(0, aniInterval),
         ),
@@ -221,8 +218,8 @@ class _DashboardScreenState extends State<DashboardScreen>
             // fix icon is not centered like others for some reasons
             padding: const EdgeInsets.only(left: 16),
             alignment: Alignment.centerLeft,
-            child: const Icon(
-              FontAwesomeIcons.moneyBill1,
+            child: Icon(
+              FontAwesomeIcons.moneyBill1.data,
               size: 20,
             ),
           ),
@@ -230,12 +227,12 @@ class _DashboardScreenState extends State<DashboardScreen>
           interval: const Interval(step, aniInterval + step),
         ),
         _buildButton(
-          icon: const Icon(FontAwesomeIcons.handHoldingDollar),
+          icon: Icon(FontAwesomeIcons.handHoldingDollar.data),
           label: 'Payment',
           interval: const Interval(step * 2, aniInterval + step * 2),
         ),
         _buildButton(
-          icon: const Icon(FontAwesomeIcons.chartLine),
+          icon: Icon(FontAwesomeIcons.chartLine.data),
           label: 'Report',
           interval: const Interval(0, aniInterval),
         ),
@@ -245,22 +242,22 @@ class _DashboardScreenState extends State<DashboardScreen>
           interval: const Interval(step, aniInterval + step),
         ),
         _buildButton(
-          icon: const Icon(FontAwesomeIcons.clockRotateLeft),
+          icon: Icon(FontAwesomeIcons.clockRotateLeft.data),
           label: 'History',
           interval: const Interval(step * 2, aniInterval + step * 2),
         ),
         _buildButton(
-          icon: const Icon(FontAwesomeIcons.ellipsis),
+          icon: Icon(FontAwesomeIcons.ellipsis.data),
           label: 'Other',
           interval: const Interval(0, aniInterval),
         ),
         _buildButton(
-          icon: const Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+          icon: Icon(FontAwesomeIcons.magnifyingGlass.data, size: 20),
           label: 'Search',
           interval: const Interval(step, aniInterval + step),
         ),
         _buildButton(
-          icon: const Icon(FontAwesomeIcons.sliders, size: 20),
+          icon: Icon(FontAwesomeIcons.sliders.data, size: 20),
           label: 'Settings',
           interval: const Interval(step * 2, aniInterval + step * 2),
         ),
@@ -279,9 +276,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           MaterialButton(
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             color: Colors.red,
-            onPressed: () => _loadingController!.value == 0
-                ? _loadingController!.forward()
-                : _loadingController!.reverse(),
+            onPressed: () => _loadingController!.value == 0 ? _loadingController!.forward() : _loadingController!.reverse(),
             child: const Text('loading', style: textStyle),
           ),
         ],
@@ -294,8 +289,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     final theme = Theme.of(context);
 
     return PopScope(
-      onPopInvokedWithResult: (hasPopped, result) =>
-          hasPopped ? _goToLogin(context) : null,
+      onPopInvokedWithResult: (hasPopped, result) => hasPopped ? _goToLogin(context) : null,
       child: SafeArea(
         child: Scaffold(
           appBar: _buildAppBar(theme),
@@ -316,7 +310,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                       flex: 8,
                       child: ShaderMask(
                         // blendMode: BlendMode.srcOver,
-                        shaderCallback: (Rect bounds) {
+                        shaderCallback: (bounds) {
                           return LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,

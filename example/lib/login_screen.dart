@@ -73,14 +73,14 @@ class LoginScreen extends StatelessWidget {
           },
         ),
         LoginProvider(
-          icon: FontAwesomeIcons.google,
+          icon: FontAwesomeIcons.google.data,
           label: 'Google',
           callback: () async {
             return null;
           },
         ),
         LoginProvider(
-          icon: FontAwesomeIcons.githubAlt,
+          icon: FontAwesomeIcons.githubAlt.data,
           callback: () async {
             debugPrint('start github sign in');
             await Future<void>.delayed(loginTime);
@@ -103,9 +103,9 @@ class LoginScreen extends StatelessWidget {
         ),
       ],
       additionalSignupFields: [
-        const UserFormField(
+        UserFormField(
           keyName: 'Username',
-          icon: Icon(FontAwesomeIcons.user),
+          icon: Icon(FontAwesomeIcons.user.data),
         ),
         const UserFormField(keyName: 'Name'),
         const UserFormField(keyName: 'Surname'),
@@ -254,14 +254,14 @@ class LoginScreen extends StatelessWidget {
           debugPrint('Terms of service: ');
           for (final element in signupData.termsOfService) {
             debugPrint(
-              ' - ${element.term.id}: ${element.accepted == true ? 'accepted' : 'rejected'}',
+              ' - ${element.term.id}: ${element.accepted ? 'accepted' : 'rejected'}',
             );
           }
         }
         return _signupUser(signupData);
       },
-      onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(
+      onSubmitAnimationCompleted: () async {
+        await Navigator.of(context).pushReplacement(
           FadePageRoute<void>(
             builder: (context) => const DashboardScreen(),
           ),

@@ -46,7 +46,7 @@ Interval _getInternalInterval(
 class AnimatedTextFormField extends StatefulWidget {
   /// Creates an [AnimatedTextFormField].
   ///
-  /// The [width] and [initialIsoCode] are required.
+  /// The [width] is required.
   ///
   /// If [inertiaController] is provided, [inertiaDirection] must also be set,
   /// and vice versa.
@@ -302,9 +302,9 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
     super.dispose();
   }
 
-  void handleAnimationStatus(AnimationStatus status) {
+  Future<void> handleAnimationStatus(AnimationStatus status) async {
     if (status == AnimationStatus.completed) {
-      widget.inertiaController?.reverse();
+      await widget.inertiaController?.reverse();
     }
   }
 
@@ -318,7 +318,7 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
       builder: (context, child) => Transform(
         alignment: Alignment.center,
         transform: Matrix4.identity()
-          ..translate(iconTranslateAnimation.value)
+          ..translateByDouble(iconTranslateAnimation.value, 0, 0, 1)
           ..rotateZ(iconRotationAnimation.value),
         child: child,
       ),
@@ -412,8 +412,8 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
         },
         title: widget.linkUrl != null
             ? InkWell(
-                onTap: () {
-                  launchUrl(Uri.parse(widget.linkUrl!));
+                onTap: () async {
+                  await launchUrl(Uri.parse(widget.linkUrl!));
                 },
                 child: Row(
                   children: [
@@ -526,7 +526,7 @@ class _AnimatedTextFormFieldState extends State<AnimatedTextFormField> {
 class AnimatedPasswordTextFormField extends StatefulWidget {
   /// Creates an [AnimatedPasswordTextFormField] for use in authentication UIs.
   ///
-  /// [animatedWidth] and [initialIsoCode] are required.
+  /// [animatedWidth] is required.
   /// If [inertiaController] is provided, then [inertiaDirection] must also be set (and vice versa).
   const AnimatedPasswordTextFormField({
     required this.animatedWidth,
@@ -616,7 +616,7 @@ class _AnimatedPasswordTextFormFieldState extends State<AnimatedPasswordTextForm
       enabled: widget.enabled,
       autofillHints: widget.autofillHints,
       labelText: widget.labelText,
-      prefixIcon: const Icon(FontAwesomeIcons.lock, size: 20),
+      prefixIcon: Icon(FontAwesomeIcons.lock.data, size: 20),
       suffixIcon: GestureDetector(
         onTap: () => setState(() => _obscureText = !_obscureText),
         dragStartBehavior: DragStartBehavior.down,
@@ -625,7 +625,7 @@ class _AnimatedPasswordTextFormFieldState extends State<AnimatedPasswordTextForm
           firstCurve: Curves.easeInOutSine,
           secondCurve: Curves.easeInOutSine,
           alignment: Alignment.center,
-          layoutBuilder: (Widget topChild, _, Widget bottomChild, _) {
+          layoutBuilder: (topChild, _, bottomChild, _) {
             return Stack(
               alignment: Alignment.center,
               children: <Widget>[bottomChild, topChild],

@@ -573,14 +573,14 @@ class _FlutterLoginState extends State<FlutterLogin> with TickerProviderStateMix
         AnimationController(
           vsync: this,
           duration: loadingDuration,
-        )..addStatusListener((status) {
+        )..addStatusListener((status) async {
           if (status == AnimationStatus.forward) {
-            _logoController.forward();
-            _titleController.forward();
+            await _logoController.forward();
+            await _titleController.forward();
           }
           if (status == AnimationStatus.reverse) {
-            _logoController.reverse();
-            _titleController.reverse();
+            await _logoController.reverse();
+            await _titleController.reverse();
           }
         });
     _logoController = AnimationController(
@@ -592,9 +592,9 @@ class _FlutterLoginState extends State<FlutterLogin> with TickerProviderStateMix
       duration: loadingDuration,
     );
 
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () async {
       if (mounted) {
-        _loadingController.forward();
+        await _loadingController.forward();
       }
     });
   }

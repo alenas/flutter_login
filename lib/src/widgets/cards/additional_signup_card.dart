@@ -174,7 +174,7 @@ class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard> with Ticke
 
   Widget _buildFields(double width) {
     return Column(
-      children: widget.formFields.map((UserFormField formField) {
+      children: widget.formFields.map((formField) {
         return Column(
           children: [
             const SizedBox(
@@ -187,7 +187,7 @@ class _AdditionalSignUpCardState extends State<_AdditionalSignUpCard> with Ticke
               loadingController: widget.loadingController,
               width: width,
               labelText: formField.displayName,
-              prefixIcon: formField.icon ?? const Icon(FontAwesomeIcons.solidCircleUser),
+              prefixIcon: formField.icon ?? Icon(FontAwesomeIcons.solidCircleUser.data),
               keyboardType: getKeyboardType(formField.userType),
               autofillHints: [
                 getAutofillHints(formField.userType),

@@ -19,8 +19,7 @@ void main() {
     tester.view.resetPhysicalSize();
   }
 
-  testWidgets('Default email validator throws error if not match email regex',
-      (WidgetTester tester) async {
+  testWidgets('Default email validator throws error if not match email regex', (tester) async {
     await tester.pumpWidget(defaultFlutterLogin());
 
     // wait for loading animation to finish
@@ -82,9 +81,7 @@ void main() {
     expect(nameTextFieldWidget(tester).decoration!.errorText, null);
   });
 
-  testWidgets(
-      'Default password validator throws error if password is less than 3 characters',
-      (WidgetTester tester) async {
+  testWidgets('Default password validator throws error if password is less than 3 characters', (tester) async {
     await tester.pumpWidget(defaultFlutterLogin());
 
     // wait for loading animation to finish
@@ -136,8 +133,7 @@ void main() {
     expect(passwordTextFieldWidget(tester).decoration!.errorText, null);
   });
 
-  testWidgets('Confirm password field throws error if not match with password',
-      (WidgetTester tester) async {
+  testWidgets('Confirm password field throws error if not match with password', (tester) async {
     await tester.pumpWidget(defaultFlutterLogin());
 
     // wait for loading animation to finish
@@ -176,17 +172,15 @@ void main() {
     expect(confirmPasswordTextFieldWidget(tester).decoration!.errorText, null);
   });
 
-  testWidgets('Custom userValidator should show error when return a string',
-      (WidgetTester tester) async {
+  testWidgets('Custom userValidator should show error when return a string', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            userValidator: (value) =>
-                value!.endsWith('.com') ? null : 'Invalid!',
-          ),
-        );
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        userValidator: (value) => value!.endsWith('.com') ? null : 'Invalid!',
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
 
@@ -209,17 +203,15 @@ void main() {
     expect(nameTextFieldWidget(tester).decoration!.errorText, null);
   });
 
-  testWidgets('Custom passwordValidator should show error when return a string',
-      (WidgetTester tester) async {
+  testWidgets('Custom passwordValidator should show error when return a string', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) =>
-                value!.length == 5 ? null : 'Invalid!',
-          ),
-        );
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => value!.length == 5 ? null : 'Invalid!',
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
 
@@ -286,33 +278,31 @@ void main() {
   //   waitForFlushbarToClose(tester);
   // });
 
-  testWidgets('Custom login messages should display correct texts',
-      (WidgetTester tester) async {
+  testWidgets('Custom login messages should display correct texts', (tester) async {
     const recoverIntro = "Don't feel bad. Happens all the time.";
-    const recoverDescription =
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
+    const recoverDescription = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry';
     const recoverSuccess = 'Password rescued successfully';
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            messages: LoginMessages(
-              userHint: 'User',
-              passwordHint: 'Pass',
-              confirmPasswordHint: 'Confirm',
-              loginButton: 'LOG IN',
-              signupButton: 'REGISTER',
-              forgotPasswordButton: 'Forgot huh?',
-              recoverPasswordButton: 'HELP ME',
-              goBackButton: 'GO BACK',
-              confirmPasswordError: 'Not match!',
-              recoverPasswordIntro: recoverIntro,
-              recoverPasswordDescription: recoverDescription,
-              recoverPasswordSuccess: recoverSuccess,
-            ),
-          ),
-        );
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        messages: LoginMessages(
+          userHint: 'User',
+          passwordHint: 'Pass',
+          confirmPasswordHint: 'Confirm',
+          loginButton: 'LOG IN',
+          signupButton: 'REGISTER',
+          forgotPasswordButton: 'Forgot huh?',
+          recoverPasswordButton: 'HELP ME',
+          goBackButton: 'GO BACK',
+          confirmPasswordError: 'Not match!',
+          recoverPasswordIntro: recoverIntro,
+          recoverPasswordDescription: recoverDescription,
+          recoverPasswordSuccess: recoverSuccess,
+        ),
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
 
@@ -399,8 +389,7 @@ void main() {
     // waitForFlushbarToClose(tester);
   });
 
-  testWidgets('showDebugButtons = false should not show debug buttons',
-      (WidgetTester tester) async {
+  testWidgets('showDebugButtons = false should not show debug buttons', (tester) async {
     var flutterLogin = widget(
       FlutterLogin(
         onSignup: (data) => null,
@@ -427,8 +416,7 @@ void main() {
     expect(findDebugToolbar(), findsNothing);
   });
 
-  testWidgets('Leave logo parameter empty should not display login logo image',
-      (WidgetTester tester) async {
+  testWidgets('Leave logo parameter empty should not display login logo image', (tester) async {
     // default device height is 600. Logo is hidden in all cases because there is no space to display
     setScreenSize(const Size(786, 1024), tester);
 
@@ -461,8 +449,7 @@ void main() {
     addTearDown(() => clearScreenSize(tester));
   });
 
-  testWidgets('Leave title parameter empty should not display login title',
-      (WidgetTester tester) async {
+  testWidgets('Leave title parameter empty should not display login title', (tester) async {
     var flutterLogin = widget(
       FlutterLogin(
         onSignup: (data) => null,
@@ -503,311 +490,312 @@ void main() {
   });
 
   testWidgets(
-      'Login callbacks should be called in order: validating cb > onLogin > onSubmitAnimationCompleted. If one callback fails, the subsequent callbacks will not be invoked',
-      (WidgetTester tester) async {
-    Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: mockCallback.onLogin,
-            onRecoverPassword: (data) => null,
-            userValidator: mockCallback.userValidator,
-            passwordValidator: mockCallback.passwordValidator,
-            onSubmitAnimationCompleted: mockCallback.onSubmitAnimationCompleted,
-          ),
-        );
-    await tester.pumpWidget(loginBuilder());
-    await tester.pumpAndSettle(loadingAnimationDuration);
+    'Login callbacks should be called in order: validating cb > onLogin > onSubmitAnimationCompleted. If one callback fails, the subsequent callbacks will not be invoked',
+    (tester) async {
+      Widget loginBuilder() => widget(
+        FlutterLogin(
+          onSignup: (data) => null,
+          onLogin: mockCallback.onLogin,
+          onRecoverPassword: (data) => null,
+          userValidator: mockCallback.userValidator,
+          passwordValidator: mockCallback.passwordValidator,
+          onSubmitAnimationCompleted: mockCallback.onSubmitAnimationCompleted,
+        ),
+      );
+      await tester.pumpWidget(loginBuilder());
+      await tester.pumpAndSettle(loadingAnimationDuration);
 
-    final users = loginStubCallback(mockCallback);
-    final user = users[0];
-    final invalidUser = users[1];
+      final users = loginStubCallback(mockCallback);
+      final user = users[0];
+      final invalidUser = users[1];
 
-    // fail at validating
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), 'invalid-name');
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), user.password);
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
+      // fail at validating
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), 'invalid-name');
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), user.password);
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
 
-    verifyInOrder([
-      mockCallback.userValidator('invalid-name'),
-      mockCallback.passwordValidator(user.password),
-    ]);
-    verifyNever(mockCallback.onLogin(any));
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
+      verifyInOrder([
+        mockCallback.userValidator('invalid-name'),
+        mockCallback.passwordValidator(user.password),
+      ]);
+      verifyNever(mockCallback.onLogin(any));
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
 
-    clearInteractions(mockCallback);
+      clearInteractions(mockCallback);
 
-    // fail at onLogin
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), invalidUser.name);
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), invalidUser.password);
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
+      // fail at onLogin
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), invalidUser.name);
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), invalidUser.password);
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
 
-    verifyInOrder([
-      mockCallback.userValidator(invalidUser.name),
-      mockCallback.passwordValidator(invalidUser.password),
-      mockCallback.onLogin(any),
-    ]);
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
+      verifyInOrder([
+        mockCallback.userValidator(invalidUser.name),
+        mockCallback.passwordValidator(invalidUser.password),
+        mockCallback.onLogin(any),
+      ]);
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
 
-    clearInteractions(mockCallback);
+      clearInteractions(mockCallback);
 
-    // pass
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), user.name);
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), user.password);
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
+      // pass
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), user.name);
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), user.password);
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
 
-    verifyInOrder([
-      mockCallback.userValidator(user.name),
-      mockCallback.passwordValidator(user.password),
-      mockCallback.onLogin(any),
-      mockCallback.onSubmitAnimationCompleted(),
-    ]);
+      verifyInOrder([
+        mockCallback.userValidator(user.name),
+        mockCallback.passwordValidator(user.password),
+        mockCallback.onLogin(any),
+        mockCallback.onSubmitAnimationCompleted(),
+      ]);
 
-    addTearDown(() => reset(mockCallback));
-  });
-
-  testWidgets(
-      'Signup callbacks should be called in order: validating cb > onSignup > onSubmitAnimationCompleted. If one callback fails, the subsequent callbacks will not be invoked',
-      (WidgetTester tester) async {
-    Widget loginBuilder() => widget(
-          FlutterLogin(
-            onLogin: (data) => null,
-            onSignup: mockCallback.onSignup,
-            onRecoverPassword: (data) => null,
-            userValidator: mockCallback.userValidator,
-            passwordValidator: mockCallback.passwordValidator,
-            onSubmitAnimationCompleted: mockCallback.onSubmitAnimationCompleted,
-          ),
-        );
-    await tester.pumpWidget(loginBuilder());
-    await tester.pumpAndSettle(loadingAnimationDuration);
-
-    final users = signupStubCallback(mockCallback);
-    final user = users[0];
-    final invalidUser = users[1];
-
-    clickSwitchAuthButton();
-    await tester.pumpAndSettle();
-    expect(isSignup(tester), true);
-
-    // fail at validating - confirm password not match
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), user.name!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findConfirmPasswordTextField(), 'not-match');
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
-
-    verifyNever(mockCallback.userValidator(invalidUser.name));
-    verifyNever(mockCallback.passwordValidator(invalidUser.password));
-    verifyNever(mockCallback.onSignup(any));
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
-
-    clearInteractions(mockCallback);
-
-    // fail at validating
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), 'invalid-name');
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findConfirmPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
-
-    verifyInOrder([
-      mockCallback.userValidator('invalid-name'),
-      mockCallback.passwordValidator(user.password),
-    ]);
-    verifyNever(mockCallback.onSignup(any));
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
-
-    clearInteractions(mockCallback);
-
-    // fail at onSignup
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), invalidUser.name!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), invalidUser.password!);
-    await tester.pumpAndSettle();
-    await tester.enterText(
-      findConfirmPasswordTextField(),
-      invalidUser.password!,
-    );
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
-
-    verifyInOrder([
-      mockCallback.userValidator(invalidUser.name),
-      mockCallback.passwordValidator(invalidUser.password),
-      mockCallback.onSignup(any),
-    ]);
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
-
-    clearInteractions(mockCallback);
-
-    // pass
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), user.name!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findConfirmPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
-
-    verifyInOrder([
-      mockCallback.userValidator(user.name),
-      mockCallback.passwordValidator(user.password),
-      mockCallback.onSignup(any),
-      mockCallback.onSubmitAnimationCompleted(),
-    ]);
-
-    addTearDown(() => reset(mockCallback));
-  });
+      addTearDown(() => reset(mockCallback));
+    },
+  );
 
   testWidgets(
-      'Signup callbacks with additionalForm should be called in order: validating cb > onSignup > onSubmitAnimationCompleted. If one callback fails, the subsequent callbacks will not be invoked',
-      (WidgetTester tester) async {
-    Widget loginBuilder() => widget(
-          FlutterLogin(
-            onLogin: (data) => null,
-            onSignup: mockCallback.onSignup,
-            onRecoverPassword: (data) => null,
-            userValidator: mockCallback.userValidator,
-            passwordValidator: mockCallback.passwordValidator,
-            onSubmitAnimationCompleted: mockCallback.onSubmitAnimationCompleted,
-            additionalSignupFields: <UserFormField>[
-              UserFormField(
-                keyName: 'Name',
-                fieldValidator: mockCallback.userValidator,
-              ),
-              UserFormField(
-                keyName: 'Surname',
-                fieldValidator: mockCallback.userValidator,
-              ),
-            ],
-          ),
-        );
-    await tester.pumpWidget(loginBuilder());
-    await tester.pumpAndSettle(loadingAnimationDuration);
+    'Signup callbacks should be called in order: validating cb > onSignup > onSubmitAnimationCompleted. If one callback fails, the subsequent callbacks will not be invoked',
+    (tester) async {
+      Widget loginBuilder() => widget(
+        FlutterLogin(
+          onLogin: (data) => null,
+          onSignup: mockCallback.onSignup,
+          onRecoverPassword: (data) => null,
+          userValidator: mockCallback.userValidator,
+          passwordValidator: mockCallback.passwordValidator,
+          onSubmitAnimationCompleted: mockCallback.onSubmitAnimationCompleted,
+        ),
+      );
+      await tester.pumpWidget(loginBuilder());
+      await tester.pumpAndSettle(loadingAnimationDuration);
 
-    final users = signupStubCallback(mockCallback);
-    final user = users[0];
-    final invalidUser = users[1];
+      final users = signupStubCallback(mockCallback);
+      final user = users[0];
+      final invalidUser = users[1];
 
-    clickSwitchAuthButton();
-    await tester.pumpAndSettle();
-    expect(isSignup(tester), true);
+      clickSwitchAuthButton();
+      await tester.pumpAndSettle();
+      expect(isSignup(tester), true);
 
-    // fail at validating - confirm password not match
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), user.name!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findConfirmPasswordTextField(), 'not-match');
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
+      // fail at validating - confirm password not match
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), user.name!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findConfirmPasswordTextField(), 'not-match');
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
 
-    verifyNever(mockCallback.userValidator(invalidUser.name));
-    verifyNever(mockCallback.passwordValidator(invalidUser.password));
-    verifyNever(mockCallback.onSignup(any));
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
+      verifyNever(mockCallback.userValidator(invalidUser.name));
+      verifyNever(mockCallback.passwordValidator(invalidUser.password));
+      verifyNever(mockCallback.onSignup(any));
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
 
-    clearInteractions(mockCallback);
+      clearInteractions(mockCallback);
 
-    // fail at validating
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), 'invalid-name');
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findConfirmPasswordTextField(), user.password!);
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
+      // fail at validating
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), 'invalid-name');
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findConfirmPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
 
-    verifyInOrder([
-      mockCallback.userValidator('invalid-name'),
-      mockCallback.passwordValidator(user.password),
-    ]);
-    verifyNever(mockCallback.onSignup(any));
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
+      verifyInOrder([
+        mockCallback.userValidator('invalid-name'),
+        mockCallback.passwordValidator(user.password),
+      ]);
+      verifyNever(mockCallback.onSignup(any));
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
 
-    clearInteractions(mockCallback);
+      clearInteractions(mockCallback);
 
-    // fail at onSignup
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNameTextField(), invalidUser.name!);
-    await tester.pumpAndSettle();
-    await tester.enterText(findPasswordTextField(), invalidUser.password!);
-    await tester.pumpAndSettle();
-    await tester.enterText(
-      findConfirmPasswordTextField(),
-      invalidUser.password!,
-    );
-    await tester.pumpAndSettle();
-    clickSubmitButton();
-    await tester.pumpAndSettle();
+      // fail at onSignup
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), invalidUser.name!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), invalidUser.password!);
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        findConfirmPasswordTextField(),
+        invalidUser.password!,
+      );
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
 
-    verifyInOrder([
-      mockCallback.userValidator(invalidUser.name),
-      mockCallback.passwordValidator(invalidUser.password),
-    ]);
-    verifyNever(mockCallback.onSignup(any));
-    verifyNever(mockCallback.onSubmitAnimationCompleted());
+      verifyInOrder([
+        mockCallback.userValidator(invalidUser.name),
+        mockCallback.passwordValidator(invalidUser.password),
+        mockCallback.onSignup(any),
+      ]);
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
 
-    clearInteractions(mockCallback);
+      clearInteractions(mockCallback);
 
-    // now we should be in the additional signup field card
-    expect(
-      find.text('Please fill in this form to complete the signup'),
-      findsOneWidget,
-    );
-    expect(find.text('Name'), findsOneWidget);
-    expect(find.text('Surname'), findsOneWidget);
+      // pass
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), user.name!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findConfirmPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
 
-    await simulateOpenSoftKeyboard(tester, loginBuilder());
-    await tester.enterText(findNthField(0), 'foo');
-    await tester.pumpAndSettle();
-    await tester.enterText(findNthField(1), 'bar');
-    await tester.pumpAndSettle();
+      verifyInOrder([
+        mockCallback.userValidator(user.name),
+        mockCallback.passwordValidator(user.password),
+        mockCallback.onSignup(any),
+        mockCallback.onSubmitAnimationCompleted(),
+      ]);
 
-    clickSubmitButton();
-    await tester.pumpAndSettle();
-
-    verifyInOrder([
-      mockCallback.userValidator('foo'),
-      mockCallback.userValidator('bar'),
-      mockCallback.onSignup(any),
-      mockCallback.onSubmitAnimationCompleted(),
-    ]);
-
-    addTearDown(() => reset(mockCallback));
-  });
+      addTearDown(() => reset(mockCallback));
+    },
+  );
 
   testWidgets(
-      'Name, pass and confirm pass fields should remember their content when switching between login/signup and recover password',
-      (WidgetTester tester) async {
+    'Signup callbacks with additionalForm should be called in order: validating cb > onSignup > onSubmitAnimationCompleted. If one callback fails, the subsequent callbacks will not be invoked',
+    (tester) async {
+      Widget loginBuilder() => widget(
+        FlutterLogin(
+          onLogin: (data) => null,
+          onSignup: mockCallback.onSignup,
+          onRecoverPassword: (data) => null,
+          userValidator: mockCallback.userValidator,
+          passwordValidator: mockCallback.passwordValidator,
+          onSubmitAnimationCompleted: mockCallback.onSubmitAnimationCompleted,
+          additionalSignupFields: <UserFormField>[
+            UserFormField(
+              keyName: 'Name',
+              fieldValidator: mockCallback.userValidator,
+            ),
+            UserFormField(
+              keyName: 'Surname',
+              fieldValidator: mockCallback.userValidator,
+            ),
+          ],
+        ),
+      );
+      await tester.pumpWidget(loginBuilder());
+      await tester.pumpAndSettle(loadingAnimationDuration);
+
+      final users = signupStubCallback(mockCallback);
+      final user = users[0];
+      final invalidUser = users[1];
+
+      clickSwitchAuthButton();
+      await tester.pumpAndSettle();
+      expect(isSignup(tester), true);
+
+      // fail at validating - confirm password not match
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), user.name!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findConfirmPasswordTextField(), 'not-match');
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
+
+      verifyNever(mockCallback.userValidator(invalidUser.name));
+      verifyNever(mockCallback.passwordValidator(invalidUser.password));
+      verifyNever(mockCallback.onSignup(any));
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
+
+      clearInteractions(mockCallback);
+
+      // fail at validating
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), 'invalid-name');
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findConfirmPasswordTextField(), user.password!);
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
+
+      verifyInOrder([
+        mockCallback.userValidator('invalid-name'),
+        mockCallback.passwordValidator(user.password),
+      ]);
+      verifyNever(mockCallback.onSignup(any));
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
+
+      clearInteractions(mockCallback);
+
+      // fail at onSignup
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNameTextField(), invalidUser.name!);
+      await tester.pumpAndSettle();
+      await tester.enterText(findPasswordTextField(), invalidUser.password!);
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        findConfirmPasswordTextField(),
+        invalidUser.password!,
+      );
+      await tester.pumpAndSettle();
+      clickSubmitButton();
+      await tester.pumpAndSettle();
+
+      verifyInOrder([
+        mockCallback.userValidator(invalidUser.name),
+        mockCallback.passwordValidator(invalidUser.password),
+      ]);
+      verifyNever(mockCallback.onSignup(any));
+      verifyNever(mockCallback.onSubmitAnimationCompleted());
+
+      clearInteractions(mockCallback);
+
+      // now we should be in the additional signup field card
+      expect(
+        find.text('Please fill in this form to complete the signup'),
+        findsOneWidget,
+      );
+      expect(find.text('Name'), findsOneWidget);
+      expect(find.text('Surname'), findsOneWidget);
+
+      await simulateOpenSoftKeyboard(tester, loginBuilder());
+      await tester.enterText(findNthField(0), 'foo');
+      await tester.pumpAndSettle();
+      await tester.enterText(findNthField(1), 'bar');
+      await tester.pumpAndSettle();
+
+      clickSubmitButton();
+      await tester.pumpAndSettle();
+
+      verifyInOrder([
+        mockCallback.userValidator('foo'),
+        mockCallback.userValidator('bar'),
+        mockCallback.onSignup(any),
+        mockCallback.onSubmitAnimationCompleted(),
+      ]);
+
+      addTearDown(() => reset(mockCallback));
+    },
+  );
+
+  testWidgets('Name, pass and confirm pass fields should remember their content when switching between login/signup and recover password', (tester) async {
     await tester.pumpWidget(defaultFlutterLogin());
     await tester.pumpAndSettle(loadingAnimationDuration);
 
@@ -837,9 +825,7 @@ void main() {
   });
 
   // https://github.com/NearHuscarl/flutter_login/issues/20
-  testWidgets(
-      'Logo should be hidden if its height is less than kMinLogoHeight. Logo height should be never larger than kMaxLogoHeight',
-      (WidgetTester tester) async {
+  testWidgets('Logo should be hidden if its height is less than kMinLogoHeight. Logo height should be never larger than kMaxLogoHeight', (tester) async {
     final flutterLogin = widget(
       FlutterLogin(
         onSignup: (data) => null,
@@ -879,8 +865,7 @@ void main() {
   // TODO: wait for flutter to add support for testing in web environment on Windows 10
   // https://github.com/flutter/flutter/issues/44583
   // https://github.com/NearHuscarl/flutter_login/issues/7
-  testWidgets('AnimatedText should be centered in mobile and web consistently',
-      (WidgetTester tester) async {
+  testWidgets('AnimatedText should be centered in mobile and web consistently', (tester) async {
     await tester.pumpWidget(defaultFlutterLogin());
     await tester.pumpAndSettle(loadingAnimationDuration);
 
@@ -892,99 +877,90 @@ void main() {
     expect(true, true);
   });
 
-  testWidgets(
-      'hideSignUpButton & hideForgotPasswordButton should hide SignUp and forgot password button',
-      (WidgetTester tester) async {
+  testWidgets('hideSignUpButton & hideForgotPasswordButton should hide SignUp and forgot password button', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) =>
-                value!.length == 5 ? null : 'Invalid!',
-            hideForgotPasswordButton: true,
-            messages: LoginMessages(
-              signupButton: 'REGISTER',
-              forgotPasswordButton: 'Forgot huh?',
-            ),
-          ),
-        );
+      FlutterLogin(
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => value!.length == 5 ? null : 'Invalid!',
+        hideForgotPasswordButton: true,
+        messages: LoginMessages(
+          signupButton: 'REGISTER',
+          forgotPasswordButton: 'Forgot huh?',
+        ),
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
     expect(find.text('REGISTER'), findsNothing);
     expect(find.text('Forgot huh?'), findsNothing);
   });
 
-  testWidgets('providers Title should be shown when there are providers',
-      (WidgetTester tester) async {
+  testWidgets('providers Title should be shown when there are providers', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) =>
-                value!.length == 5 ? null : 'Invalid!',
-            loginProviders: [
-              LoginProvider(
-                icon: Icons.ac_unit,
-                callback: () {
-                  return null;
-                },
-              ),
-            ],
-            messages: LoginMessages(
-              signupButton: 'REGISTER',
-              forgotPasswordButton: 'Forgot huh?',
-            ),
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => value!.length == 5 ? null : 'Invalid!',
+        loginProviders: [
+          LoginProvider(
+            icon: Icons.ac_unit,
+            callback: () {
+              return null;
+            },
           ),
-        );
+        ],
+        messages: LoginMessages(
+          signupButton: 'REGISTER',
+          forgotPasswordButton: 'Forgot huh?',
+        ),
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
     expect(find.text('or login with'), findsOneWidget);
   });
 
-  testWidgets('providers Title should not be shown when there are no providers',
-      (WidgetTester tester) async {
+  testWidgets('providers Title should not be shown when there are no providers', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) =>
-                value!.length == 5 ? null : 'Invalid!',
-            messages: LoginMessages(
-              signupButton: 'REGISTER',
-              forgotPasswordButton: 'Forgot huh?',
-            ),
-          ),
-        );
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => value!.length == 5 ? null : 'Invalid!',
+        messages: LoginMessages(
+          signupButton: 'REGISTER',
+          forgotPasswordButton: 'Forgot huh?',
+        ),
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
     expect(find.text('or login with'), findsNothing);
   });
-  testWidgets('hideProvidersTitle should hide providers title',
-      (WidgetTester tester) async {
+  testWidgets('hideProvidersTitle should hide providers title', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) =>
-                value!.length == 5 ? null : 'Invalid!',
-            hideProvidersTitle: true,
-            loginProviders: [
-              LoginProvider(
-                icon: Icons.ac_unit,
-                callback: () {
-                  return null;
-                },
-              ),
-            ],
-            messages: LoginMessages(
-              signupButton: 'REGISTER',
-              forgotPasswordButton: 'Forgot huh?',
-            ),
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => value!.length == 5 ? null : 'Invalid!',
+        hideProvidersTitle: true,
+        loginProviders: [
+          LoginProvider(
+            icon: Icons.ac_unit,
+            callback: () {
+              return null;
+            },
           ),
-        );
+        ],
+        messages: LoginMessages(
+          signupButton: 'REGISTER',
+          forgotPasswordButton: 'Forgot huh?',
+        ),
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
     expect(find.text('or login with'), findsNothing);
@@ -1048,17 +1024,16 @@ void main() {
   //   waitForFlushbarToClose(tester);
   // });
 
-  testWidgets('Redirect to login page after sign up.',
-      (WidgetTester tester) async {
+  testWidgets('Redirect to login page after sign up.', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            loginAfterSignUp: false,
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) => null,
-          ),
-        );
+      FlutterLogin(
+        loginAfterSignUp: false,
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => null,
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
 
@@ -1079,26 +1054,24 @@ void main() {
     expect(isSignup(tester), false);
   });
 
-  testWidgets(
-      'Redirect to signup card if there are additional signup fields, test that filled in fields are passed correctly to the callback',
-      (WidgetTester tester) async {
+  testWidgets('Redirect to signup card if there are additional signup fields, test that filled in fields are passed correctly to the callback', (tester) async {
     var signupFields = <String, String>{};
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            loginAfterSignUp: false,
-            onSignup: (data) {
-              signupFields = data.additionalSignupData!;
-              return null;
-            },
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) => null,
-            additionalSignupFields: const [
-              UserFormField(keyName: 'Name'),
-              UserFormField(keyName: 'Surname'),
-            ],
-          ),
-        );
+      FlutterLogin(
+        loginAfterSignUp: false,
+        onSignup: (data) {
+          signupFields = data.additionalSignupData!;
+          return null;
+        },
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => null,
+        additionalSignupFields: const [
+          UserFormField(keyName: 'Name'),
+          UserFormField(keyName: 'Surname'),
+        ],
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
 
@@ -1137,22 +1110,20 @@ void main() {
     expect(signupFields['Surname'], 'bar');
   });
 
-  testWidgets(
-      'Redirect to login page after sign up with additional fields when loginAfterSignup is false',
-      (WidgetTester tester) async {
+  testWidgets('Redirect to login page after sign up with additional fields when loginAfterSignup is false', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            loginAfterSignUp: false,
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) => null,
-            additionalSignupFields: const [
-              UserFormField(keyName: 'Name'),
-              UserFormField(keyName: 'Surname'),
-            ],
-          ),
-        );
+      FlutterLogin(
+        loginAfterSignUp: false,
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => null,
+        additionalSignupFields: const [
+          UserFormField(keyName: 'Name'),
+          UserFormField(keyName: 'Surname'),
+        ],
+      ),
+    );
 
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
@@ -1184,23 +1155,21 @@ void main() {
     expect(isSignup(tester), false);
   });
 
-  testWidgets('Redirect to login page after sign up with additional fields',
-      (WidgetTester tester) async {
+  testWidgets('Redirect to login page after sign up with additional fields', (tester) async {
     var onSubmitAnimationCompletedExecuted = false;
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) => null,
-            additionalSignupFields: const [
-              UserFormField(keyName: 'Name'),
-              UserFormField(keyName: 'Surname'),
-            ],
-            onSubmitAnimationCompleted: () =>
-                onSubmitAnimationCompletedExecuted = true,
-          ),
-        );
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => null,
+        additionalSignupFields: const [
+          UserFormField(keyName: 'Name'),
+          UserFormField(keyName: 'Surname'),
+        ],
+        onSubmitAnimationCompleted: () => onSubmitAnimationCompletedExecuted = true,
+      ),
+    );
 
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
@@ -1232,16 +1201,16 @@ void main() {
     expect(onSubmitAnimationCompletedExecuted, true);
   });
 
-  testWidgets('Check if footer text is visible.', (WidgetTester tester) async {
+  testWidgets('Check if footer text is visible.', (tester) async {
     Widget loginBuilder() => widget(
-          FlutterLogin(
-            onSignup: (data) => null,
-            onLogin: (data) => null,
-            onRecoverPassword: (data) => null,
-            passwordValidator: (value) => null,
-            footer: 'Copyright flutter_login',
-          ),
-        );
+      FlutterLogin(
+        onSignup: (data) => null,
+        onLogin: (data) => null,
+        onRecoverPassword: (data) => null,
+        passwordValidator: (value) => null,
+        footer: 'Copyright flutter_login',
+      ),
+    );
     await tester.pumpWidget(loginBuilder());
     await tester.pumpAndSettle(loadingAnimationDuration);
 

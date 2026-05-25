@@ -22,8 +22,7 @@ class RoundButton extends StatefulWidget {
   RoundButtonState createState() => RoundButtonState();
 }
 
-class RoundButtonState extends State<RoundButton>
-    with SingleTickerProviderStateMixin {
+class RoundButtonState extends State<RoundButton> with SingleTickerProviderStateMixin {
   late AnimationController _pressController;
   late Animation<double> _scaleLoadingAnimation;
   late Animation<double> _scaleAnimation;
@@ -61,8 +60,7 @@ class RoundButtonState extends State<RoundButton>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final primaryColor =
-        Colors.primaries.where((c) => c == theme.primaryColor).first;
+    final primaryColor = Colors.primaries.where((c) => c == theme.primaryColor).first;
 
     return Padding(
       padding: const EdgeInsets.all(8),
@@ -81,9 +79,9 @@ class RoundButtonState extends State<RoundButton>
                     // allow more than 1 FAB in the same screen (hero tag cannot be duplicated)
                     heroTag: null,
                     backgroundColor: primaryColor.shade400,
-                    onPressed: () {
-                      _pressController.forward().then((_) {
-                        _pressController.reverse();
+                    onPressed: () async {
+                      await _pressController.forward().then((_) async {
+                        await _pressController.reverse();
                       });
                       widget.onPressed();
                     },
@@ -96,8 +94,7 @@ class RoundButtonState extends State<RoundButton>
             const SizedBox(height: 10),
             Text(
               widget.label!,
-              style: theme.textTheme.bodySmall!
-                  .copyWith(color: theme.primaryColor),
+              style: theme.textTheme.bodySmall!.copyWith(color: theme.primaryColor),
               textAlign: TextAlign.center,
             ),
           ],
